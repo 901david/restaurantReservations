@@ -38,12 +38,43 @@
     <input class="form-control" type="email" id="email-input">
   </div>
 </div>
-    <a href="/api/new"><div class="btn btn-warning" id="formSubmission">Submit</div>
-    </div></a>
+    <div class="btn btn-warning" id="formSubmission">Submit</div>
+    </div>
   </div>
   <div class="container">
     <a href="/api/tables">API Table Link</a><span> | </span>
     <a href="/api/list">API Wait List</a>
   </div>
 </body>
+<script>
+function CreateReservation (nameArg, phoneArg, emailArg, idArg) {
+  this.name = nameArg;
+  this.phone = phoneArg;
+  this.email = emailArg;
+  this.uniqueId = idArg;
+};
+$(document).ready(function () {
+  var idCreator = 0;
+  var currentURL = window.location.origin;
+  $("#formSubmission").click(()=>{
+    idCreator++;
+    let name = $("#text-input").val();
+    let phone = $("#search-input").val();
+    let email = $("#email-input").val();
+    let res_id = idCreator;
+    $("#text-input").val("");
+    $("#search-input").val("");
+    $("#email-input").val("");
+    var newReservationPlease = new CreateReservation(name, phone, email, res_id);
+    $.ajax({
+      url: currentURL + "/api/new",
+      method: "POST",
+      data: newReservationPlease
+    }).done(function(response) {
+      console.log(response);
+
+    });
+  })
+});
+</script>
 </html>

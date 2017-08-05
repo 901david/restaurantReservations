@@ -33,20 +33,30 @@ app.get("/api/list", function(req, res) {
   res.json(currentWait);
 });
 
-var currentReservations = [{name: "Chris", phone: "3032960017", email:  "fake@fake.com"}];
-var currentWait = [{name: "Mike", phone: "3032960017", email:  "fake@fake.com"}];
+var currentReservations = [];
+var currentWait = [];
 
+
+  var createdNumber = currentReservations.length + currentWait.length + 1;
   app.post("/api/new", function(req, res) {
+    // req.body hosts is equal to the JSON post sent from the user
     var newReservation = req.body;
-    // newReservation.routeName = newReservation.name;
-
-    // console.log(newReservation);
-
+    if (currentReservations.length > 4){
+      currentWait.push(newReservation);
+      console.log(currentWait);
+      res.json(currentWait);
+    }
+    else{
     currentReservations.push(newReservation);
-    //
+    // We then display the JSON to the users
+    console.log(currentReservations);
     res.json(currentReservations);
+  }
   });
-
+// $("#clearTable").click(()=>{
+//   currentReservations = [];
+//   currentWait = [];
+// });
 // Starts the server to begin listening
 // =============================================================
 app.listen(PORT, function() {

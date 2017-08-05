@@ -7,6 +7,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
 	<script rel="javascript" type="text/javascript" src="script/app.js"></script>
+  <script rel="javascript" type="text/javascript" src="script/view.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<title>View Reservations</title>
 </head>
@@ -20,15 +21,38 @@
       <a href="/"><div class="btn btn-success" id="home"><span class="glyphicon glyphicon-home"> </span></div>
     </div></a>
     <div class="col-lg-12" id="currentRes">
-    <p>Current Wait List</p>
+    <p>Current Reservations</p>
   </div>
   <div class="col-lg-12" id="waitingList">
   <p>Waiting List</p>
 </div>
 <div class="container">
-  <a href="/api/clear">Clear Table</a><span> | </span>
+  <a href="#" id="clearTable">Clear Table</a><span> | </span>
   <a href="/api/tables">API Table Link</a><span> | </span>
   <a href="/api/list">API Wait List</a>
 </div>
 </body>
+<script>
+var currentURL = window.location.origin;
+var urlOne = currentURL + "/api/tables";
+var urlTwo = currentURL + "/api/list";
+$.ajax({
+  url: urlOne,
+  method: "GET"
+}).done(function(response) {
+  console.log(response);
+  for (var i = 0; i < 10; i++){
+  	$("#currentRes").append("<div class='well'><div class='btn btn-primary'>" + response[i].uniqueId + "</div><span>" + response[i].name + " " + response[i].phone + " " + response[i].email + "</span></div>");
+  }
+});
+$.ajax({
+url: urlTwo,
+method: "GET"
+}).done(function(response) {
+console.log(response);
+for (var i = 0; i < 10; i++){
+  $("#waitingList").append("<div class='well'><div class='btn btn-primary'>" + response[i].uniqueId + "</div><span>" + response[i].name + " " + response[i].phone + " " + response[i].email + "</span></div>");
+}
+});
+</script>
 </html>
