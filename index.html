@@ -6,19 +6,23 @@
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
-	<script rel="javascript" type="text/javascript" src="script/game.js"></script>
+	<script rel="javascript" type="text/javascript" src="script/app.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<title>Restaurant Reservations</title>
 </head>
 <body>
   <div class="container">
     <div class="jumbotron">
-      <h1>Fire & Ice</h1>
+      <span class="glyphicon glyphicon-fire"></span><span> Fire & Ice </span><span class="glyphicon glyphicon-tint"></span>
       <hr/>
       <p>We only have 5 tables!  Book your seat before they all are gone!</p>
-      <div class="btn btn-primary btn-lg" id="viewTables"><span class="glyphicon glyphicon-th-list"> </span> View Tables</div>
-      <div class="btn btn-warning btn-lg" id="viewTables"><span class="glyphicon glyphicon-th-list"> </span> View Tables</div>
+      <a href="/tables"><div class="btn btn-primary" id="viewTables"><span class="glyphicon glyphicon-th-list"> </span> View Tables</div></a>
+      <a href="/reserve"><div class="btn btn-danger" id="makeReserve"><span class="glyphicon glyphicon-glass"> </span> Make Reservation</div></a>
     </div>
+  </div>
+  <div class="container">
+    <a href="/api/tables">API Table Link</a><span> | </span>
+    <a href="/api/list">API Wait List</a>
   </div>
 </body>
 </html>
